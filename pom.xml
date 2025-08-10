@@ -44,6 +44,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.8.9</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>0.2.6</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -105,9 +115,9 @@
 							to your OpenAPI YAML  -->
 							<generatorName>spring</generatorName>
 							<output>${project.build.directory}/generated-sources</output>
-							<packageName>com.ba.userservice</packageName>
-							<apiPackage>com.ba.userservice.api</apiPackage>
-							<modelPackage>com.ba.userservice.model</modelPackage>
+							<packageName>com.ba.users</packageName>
+							<apiPackage>com.ba.users.api</apiPackage>
+							<modelPackage>com.ba.users.model</modelPackage>
 							<configOptions>
 								<javaVersion>17</javaVersion>
 								<!--  For Java 17  -->
