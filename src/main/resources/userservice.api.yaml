@@ -22,6 +22,10 @@ paths:
       responses:
         '201':
           description: Successfully created a token for the given user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenDetailsResponse'
         '404':
           description: User not found
         '400': 
@@ -37,6 +41,10 @@ paths:
       responses:
         '200':
           description: User is valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetailsResponse'
         '400':
           description: Invalid request data
         '401':
@@ -60,6 +68,34 @@ components:
       required:
         - username
         - password
+    UserDetailsResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "123"
+        scopes:
+          type: array
+          items:
+            type: string
+          example: [bid:create, auction:read, user:read_contact]  
+      required:
+        - id  
+        - username
+        - privileges 
+    TokenDetailsResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: "eyJHGcdsjfldsfdssssssvdfvdfvdf"
+        expiresAt:
+          type: string
+          format: date-time
+          description: Creation date and time
+          example: "2023-02-08T18:04:28Z"
+      required:
+        - token      
   securitySchemes:
     BearerAuth:
       type: http
