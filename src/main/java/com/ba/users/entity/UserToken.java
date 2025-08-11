@@ -3,42 +3,53 @@
  */
 package com.ba.users.entity;
 
-import java.sql.Timestamp;
+import java.time.Instant;
+
+import org.hibernate.annotations.UuidGenerator;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.MapsId;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 /**
  * @author Preeti Pandey
  *
  */
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "user_token")
 public class UserToken {
 
 	@Id
-	@Column(name = "user_id")
+	@UuidGenerator(style = UuidGenerator.Style.TIME)
+	@Column(name = "id", updatable = false, nullable = false)
 	private String id;
 
-	@OneToOne
-	@MapsId
-	@JoinColumn(name = "user_id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
-	@Column(name = "token_key")
+	@Column(name = "token_key", nullable = false, unique = true)
 	private String tokenKey;
 
-	@Column
+	@Column(nullable = false)
 	private boolean active;
 
-	@Column(name = "expired_at")
-	private Timestamp expiredAt;
+	@Column(name = "created_at", nullable = false)
+	private Instant createdAt;
+
+	@Column(name = "expires_at", nullable = false)
+	private Instant expiresAt;
 
 }

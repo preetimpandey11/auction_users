@@ -77,8 +77,5 @@ public class User implements Serializable {
 	@Column(name = "created_at")
 	protected LocalDateTime createdAt;
 
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
-	private UserToken token;
 
 }
