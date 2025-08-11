@@ -7,6 +7,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.ba.users.exception.InvalidTokenException;
+import com.ba.users.security.CustomUserDetails;
 
 /**
  * @author Preeti Pandey
@@ -17,7 +18,8 @@ public interface TokenService<T, R> {
 	default String getPrincipalFromUsernamePasswordAuthenticationToken() {
 		UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder
 				.getContext().getAuthentication();
-		return (String) authentication.getPrincipal();
+		CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
+		return principal.getUsername();
 	}
 
 	T generate();

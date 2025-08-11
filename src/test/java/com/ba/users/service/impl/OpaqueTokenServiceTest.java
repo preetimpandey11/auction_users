@@ -6,6 +6,7 @@ package com.ba.users.service.impl;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.Collections;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -47,8 +48,8 @@ public class OpaqueTokenServiceTest {
 	@BeforeEach
 	public void setup() {
 		SecurityContextHolder.createEmptyContext();
-		SecurityContextHolder.getContext()
-				.setAuthentication(new UsernamePasswordAuthenticationToken("testuser", "pass"));
+		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
+				new CustomUserDetails("testuser", "pass", Collections.emptyList()), "pass"));
 	}
 
 	@AfterEach
