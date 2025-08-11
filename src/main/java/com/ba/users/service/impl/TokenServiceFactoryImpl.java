@@ -18,20 +18,21 @@ import lombok.RequiredArgsConstructor;
  */
 @Component
 @RequiredArgsConstructor
-public class TokenGeneratorFactoryImpl implements TokenServiceFactory {
+public class TokenServiceFactoryImpl implements TokenServiceFactory {
 
 	private final OpaqueTokenService opagueTokenService;
 
 	@Override
-	public <T, R> TokenService<T, R> getTokenServiceImpl(TokenType tokenType) {
-		switch (tokenType) {
-		case JWT:
-			throw new NotImplementedException("The JWT is not implemented yet.");
-		case OPAQUE:
-			return (TokenService<T, R>) opagueTokenService;
-		default:
-			return (TokenService<T, R>) opagueTokenService;
+	public <T, R> TokenService<T, R> getTokenService(TokenType tokenType) {
+		if (null != tokenType) {
+			switch (tokenType) {
+			case JWT:
+				throw new NotImplementedException("The JWT is not implemented yet.");
+			case OPAQUE:
+				return (TokenService<T, R>) opagueTokenService;
+			}
 		}
+		return (TokenService<T, R>) opagueTokenService;
 	}
 
 }

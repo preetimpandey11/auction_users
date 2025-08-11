@@ -11,6 +11,6 @@ import com.ba.users.model.TokenType;
  */
 public interface TokenServiceFactory {
 
-	<T, R> TokenService<T, R> getTokenServiceImpl(TokenType tokenType);
+	<T, R> TokenService<T, R> getTokenService(TokenType tokenType);
 
 }
