@@ -89,11 +89,6 @@ components:
         token:
           type: string
           example: "eyJHGcdsjfldsfdssssssvdfvdfvdf"
-        expiresAt:
-          type: string
-          format: date-time
-          description: Creation date and time
-          example: "2023-02-08T18:04:28Z"
       required:
         - token      
   securitySchemes:
