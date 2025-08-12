@@ -14,7 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ba.users.api.TokensApi;
+import com.ba.users.api.AuthApi;
 import com.ba.users.model.LoginRequest;
 import com.ba.users.model.TokenDetailsResponse;
 import com.ba.users.model.TokenType;
@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-public class UserTokenController implements TokensApi {
+public class AuthTokenController implements AuthApi {
 
 	private final TokenServiceFactory tokenServiceFactory;
 

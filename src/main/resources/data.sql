@@ -3,7 +3,7 @@ insert into privilege
 values
 ('user:read_summary'),
 ('user:read_contact'),
-('user:read_name'),
+('user:read_profile'),
 ('user:read_full');
 
 
@@ -17,7 +17,9 @@ insert into role_privilege
 (role_code, privilege_code)
 values
 ('seller','user:read_contact'),
-('buyer','user:read_name');
+('seller','user:read_summary'),
+('buyer','user:read_profile'),
+('buyer','user:read_summary');
 
 insert into auction_user
 (id, username, password, first_name, middle_name, last_name, email, contact_no, zipcode, active, created_at)
