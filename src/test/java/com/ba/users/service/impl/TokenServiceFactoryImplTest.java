@@ -3,8 +3,8 @@
  */
 package com.ba.users.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ import com.ba.users.service.TokenService;
  *
  */
 @ExtendWith(MockitoExtension.class)
-public class TokenServiceFactoryImplTest {
+class TokenServiceFactoryImplTest {
 
 	@Mock
 	private OpaqueTokenService opagueTokenService;
@@ -32,7 +32,7 @@ public class TokenServiceFactoryImplTest {
 	@Test
 	void testGetTokenService_OpaqueToken() {
 		TokenService<Object, Object> tokenService = tokenServiceFactoryImpl.getTokenService(TokenType.OPAQUE);
-		assertTrue(tokenService.getClass().equals(OpaqueTokenService.class));
+		assertEquals(OpaqueTokenService.class, tokenService.getClass());
 	}
 
 	@Test
@@ -41,11 +41,11 @@ public class TokenServiceFactoryImplTest {
 			tokenServiceFactoryImpl.getTokenService(TokenType.JWT);
 		});
 	}
-	
+
 	@Test
 	void testGetTokenService_NoType() {
 		TokenService<Object, Object> tokenService = tokenServiceFactoryImpl.getTokenService(null);
-		assertTrue(tokenService.getClass().equals(OpaqueTokenService.class));
+		assertEquals(OpaqueTokenService.class, tokenService.getClass());
 	}
 
 }

@@ -6,7 +6,6 @@ package com.ba.users.service.impl;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
@@ -37,11 +36,11 @@ public class OpaqueTokenService implements TokenService<String, CustomUserDetail
 	@Override
 	public CustomUserDetails validate(String token) {
 		UserToken userToken = userTokenRepository.findByTokenKeyAndActiveTrue(token)
-				.orElseThrow(() -> new InvalidTokenException());
+				.orElseThrow(InvalidTokenException::new);
 
 		return new CustomUserDetails(userToken.getUser().getId(),
 				userToken.getUser().getRoles().stream().flatMap(r -> r.getPrivileges().stream()).map(Privilege::getCode)
-						.map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
+						.map(SimpleGrantedAuthority::new).toList());
 	}
 
 	@Override

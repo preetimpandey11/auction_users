@@ -4,7 +4,6 @@
 package com.ba.users.security;
 
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -35,8 +34,7 @@ public class CustomUserDetails implements UserDetails {
 	public CustomUserDetails(String username, String password, Collection<String> authorities) {
 		this.username = username;
 		this.password = password;
-		this.authorities = authorities.stream().map(authority -> new SimpleGrantedAuthority(authority))
-				.collect(Collectors.toList());
+		this.authorities = authorities.stream().map(SimpleGrantedAuthority::new).toList();
 	}
 
 	public CustomUserDetails(User user) {
@@ -44,7 +42,7 @@ public class CustomUserDetails implements UserDetails {
 		this.password = user.getPassword();
 		this.authorities = user.getRoles().stream()
 				.flatMap(role -> role.getPrivileges().stream().map(p -> new SimpleGrantedAuthority(p.getCode())))
-				.collect(Collectors.toList());
+				.toList();
 	}
 
 	@Override

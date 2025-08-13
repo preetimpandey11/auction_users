@@ -24,15 +24,15 @@ public class TokenServiceFactoryImpl implements TokenServiceFactory {
 
 	@Override
 	public <T, R> TokenService<T, R> getTokenService(TokenType tokenType) {
-		if (null != tokenType) {
-			switch (tokenType) {
-			case JWT:
-				throw new NotImplementedException("The JWT is not implemented yet.");
-			case OPAQUE:
-				return (TokenService<T, R>) opagueTokenService;
-			}
+		if (null == tokenType) {
+			return (TokenService<T, R>) opagueTokenService;
 		}
-		return (TokenService<T, R>) opagueTokenService;
+		if (TokenType.OPAQUE.equals(tokenType)) {
+			return (TokenService<T, R>) opagueTokenService;
+		} else {
+			throw new NotImplementedException("Invalid token type. Please set the token type to OPAQUE.");
+		}
+
 	}
 
 }

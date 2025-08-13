@@ -4,6 +4,7 @@
 package com.ba.users.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ import com.ba.users.entity.User;
  *
  */
 @DataJpaTest
-public class UserRepositoryTest {
+class UserRepositoryTest {
 
 	@Autowired
 	private UserRepository userRepository;
@@ -28,7 +29,7 @@ public class UserRepositoryTest {
 	private User testUser;
 
 	@BeforeEach
-	public void setUp() {
+	void setUp() {
 		testUser = new User();
 		testUser.setUsername("testuser");
 		testUser.setPassword("password");
@@ -36,33 +37,33 @@ public class UserRepositoryTest {
 	}
 
 	@AfterEach
-	public void tearDown() {
+	void tearDown() {
 		userRepository.delete(testUser);
 	}
 
 	@Test
-	public void testFindByUsername_validInput() {
+	void testFindByUsername_validInput() {
 		Optional<User> retrievedUser = userRepository.findByUsername("testuser");
 		assert retrievedUser.isPresent();
 		assertEquals(testUser, retrievedUser.get());
 	}
 
 	@Test
-	public void testFindByUsername_nullInput() {
+	void testFindByUsername_nullInput() {
 		Optional<User> retrievedUser = userRepository.findByUsername(null);
-		assert retrievedUser.isEmpty();
+		assertTrue(retrievedUser.isEmpty());
 	}
 
 	@Test
-	public void testFindByUsername_blankInput() {
+	void testFindByUsername_blankInput() {
 		Optional<User> retrievedUser = userRepository.findByUsername("");
-		assert retrievedUser.isEmpty();
+		assertTrue(retrievedUser.isEmpty());
 	}
 
 	@Test
-	public void testFindByUsername_invalidInput() {
+	void testFindByUsername_invalidInput() {
 		Optional<User> retrievedUser = userRepository.findByUsername("invaliduser");
-		assert retrievedUser.isEmpty();
+		assertTrue(retrievedUser.isEmpty());
 	}
 
 }

@@ -33,8 +33,8 @@ public class OpaqueTokenAuthorizationFilter extends OncePerRequestFilter {
 
 	private final TokenServiceFactory tokenServiceFactory;
 
-	private final String AUTH_HEADER = "Authorization";
-	private final String AUTH_TYPE = "Bearer";
+	private static final String AUTH_HEADER = "Authorization";
+	private static final String AUTH_TYPE = "Bearer";
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -48,8 +48,8 @@ public class OpaqueTokenAuthorizationFilter extends OncePerRequestFilter {
 		}
 
 		try {
-			CustomUserDetails userDetails = (CustomUserDetails) tokenServiceFactory
-					.getTokenService(TokenType.OPAQUE).validate(token);
+			CustomUserDetails userDetails = (CustomUserDetails) tokenServiceFactory.getTokenService(TokenType.OPAQUE)
+					.validate(token);
 			final SecurityContext context = SecurityContextHolder.createEmptyContext();
 			final UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
 					userDetails.getUsername(), null, userDetails.getAuthorities());

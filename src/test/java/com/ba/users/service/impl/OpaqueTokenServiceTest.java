@@ -34,7 +34,7 @@ import com.ba.users.security.CustomUserDetails;
  */
 
 @ExtendWith(MockitoExtension.class)
-public class OpaqueTokenServiceTest {
+ class OpaqueTokenServiceTest {
 
 	@Mock
 	private UserTokenRepository userTokenRepository;
@@ -46,19 +46,19 @@ public class OpaqueTokenServiceTest {
 	private OpaqueTokenService tokenService;
 
 	@BeforeEach
-	public void setup() {
+	 void setup() {
 		SecurityContextHolder.createEmptyContext();
 		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
 				new CustomUserDetails("testuser", "pass", Collections.emptyList()), "pass"));
 	}
 
 	@AfterEach
-	public void teardown() {
+	 void teardown() {
 		SecurityContextHolder.clearContext();
 	}
 
 	@Test
-	public void testGenerate_success() {
+	 void testGenerate_success() {
 
 		User testuser = new User();
 		testuser.setUsername("testUser");
@@ -71,14 +71,14 @@ public class OpaqueTokenServiceTest {
 	}
 
 	@Test
-	public void testGenerate_userNotFound() {
+	 void testGenerate_userNotFound() {
 		Mockito.when(userRepository.findByUsername("testuser")).thenReturn(Optional.empty());
 		assertThrows(NoSuchElementException.class, () -> tokenService.generate());
 
 	}
 
 	@Test
-	public void testValidate_success() {
+	 void testValidate_success() {
 
 		UserToken token = new UserToken();
 		token.setTokenKey("testuser");
@@ -92,7 +92,7 @@ public class OpaqueTokenServiceTest {
 	}
 
 	@Test
-	public void testValidate_tokenNotFound() {
+	 void testValidate_tokenNotFound() {
 		Mockito.when(userTokenRepository.findByTokenKeyAndActiveTrue("testuser")).thenReturn(Optional.empty());
 		assertThrows(InvalidTokenException.class, () -> tokenService.validate("testuser"));
 

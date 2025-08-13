@@ -4,7 +4,6 @@
 package com.ba.users.controllers;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,7 +60,7 @@ public class AuthTokenController implements AuthApi {
 		log.trace("Validating the user token");
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String id = (String) auth.getPrincipal();
-		List<String> privs = auth.getAuthorities().stream().map(x -> x.getAuthority()).collect(Collectors.toList());
+		List<String> privs = auth.getAuthorities().stream().map(x -> x.getAuthority()).toList();
 		UserDetailsResponse response = new UserDetailsResponse();
 		response.setId(id);
 		response.setScopes(privs);

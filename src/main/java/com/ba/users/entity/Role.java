@@ -3,6 +3,7 @@
  */
 package com.ba.users.entity;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,7 +26,12 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "role")
-public class Role {
+public class Role implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4021795818452913592L;
 
 	@Id
 	@Column(name = "code", updatable = false, nullable = false)
