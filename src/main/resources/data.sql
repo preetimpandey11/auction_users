@@ -4,7 +4,12 @@ values
 ('user:read_summary'),
 ('user:read_contact'),
 ('user:read_profile'),
-('user:read_full');
+('auction:view'),
+('auction:create'),
+('auction:close'),
+('auctionedProduct:view'),
+('auctionedProduct:create'),
+('bid:create');
 
 
 insert into role
@@ -18,8 +23,16 @@ insert into role_privilege
 values
 ('seller','user:read_contact'),
 ('seller','user:read_summary'),
+('seller','auction:create'),
+('seller','auction:view'),
+('seller','auction:close'),
+('seller','auctionedProduct:view'),
+('seller','auctionedProduct:create'),
 ('buyer','user:read_profile'),
-('buyer','user:read_summary');
+('buyer','user:read_summary'),
+('buyer','bid:create'),
+('buyer','auction:view'),
+('buyer','auctionedProduct:view');
 
 insert into auction_user
 (id, username, password, first_name, middle_name, last_name, email, contact_no, zipcode, active, created_at)
