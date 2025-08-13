@@ -46,7 +46,7 @@ public class AppSecurityConfiguration {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.csrf(AbstractHttpConfigurer::disable)
 				.sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.authorizeHttpRequests(configurer -> configurer.requestMatchers("/auth/token", "/error", "/swagger*")
+				.authorizeHttpRequests(configurer -> configurer.requestMatchers("/auth/token", "/error", "/swagger-ui/**","/v3/api-docs/**")
 						.permitAll().anyRequest().authenticated())
 				.authenticationProvider(authenticationProvider())
 				.addFilterBefore(opaqueTokenAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
